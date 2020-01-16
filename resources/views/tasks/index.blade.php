@@ -1,38 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('todoTasks.layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('content')
 
-<body>
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Our TodoApp</h1>
+    <p class="lead">This is a simple TodoApp is developed by Niraj Pal.</p>
+    <hr class="my-4">
+    <p>Here you can create you daily tasks in this app which helps you to recall the tasks. Let's Create</p>
+    <a class="btn btn-primary btn-lg" href="/todoTasks/create" role="button">Create Now</a>
+</div>
 
-    <h1>List of all Tasks</h1>
-    <ul>
 
-        @foreach($allTasks as $t)
-
-        <li>{{$t->name}}
-
-            <a href="/tasks/{{$t->id}}/edit">edit</a>
-            <!-- <a href="/tasks/{{$t->id}}/edit">edit</a> -->
-
-            <form action="/tasks/{{$t->id}}" method="post">
-            @csrf
-            @method('delete') 
+<div class="container">
+ <!-- //validation errors here -->
+ @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             
-                <input type="submit" value='delete'>
-            </form>
 
-        </li>
 
-        @endforeach
+<div class="container text-center">
+    <h1 class="display-4">List of Tasks</h1>
 
-    </ul>
+    <div>
 
-</body>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>created_at</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
 
-</html>
+                @foreach($alltodoTasks as $t)
+
+                <tr>
+                    <td>{{$t->title}}</td>
+                    <td> {{$t->Description}}</td>
+                    <td>{{$t->created_at->diffForHumans()}}</td>
+                    <td>
+                        <a href="/todoTasks/{{$t->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
+                        <form action="/todoTasks/{{$t->id}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <input type="submit" class="btn btn-danger btn-sm" value='delete'>
+                        </form>
+                    </td>
+                </tr>
+
+                @endforeach
+
+                </div>
+
+                @endsection()
