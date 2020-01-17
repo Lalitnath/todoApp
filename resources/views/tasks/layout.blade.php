@@ -23,7 +23,7 @@
                         <a class="nav-link" href="/todoTasks">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/todoTasks/create">Create</a>
+                        <a class="nav-link" href="/tasks/create">Create</a>
                     </li>
                 </ul>
             </div>

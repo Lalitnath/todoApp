@@ -41,6 +41,8 @@ class TasksController extends Controller
         
         $task = new Task();
         $task->name=request('name');
+        $task->discription=request('discription');
+
         $task->save();
         
         return redirect('/tasks');
@@ -81,6 +83,8 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         $task->name = request('name');
+        $task->discription=request('discription');
+
         $task->save();
 
         return redirect('/tasks');
