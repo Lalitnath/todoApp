@@ -17,3 +17,7 @@
 Route::get('/', 'TasksController@index');
 // Route::redirect('/','/tasks');
 Route::resource('tasks','TasksController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
